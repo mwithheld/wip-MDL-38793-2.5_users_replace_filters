@@ -23,11 +23,27 @@ class user_add_filter_form extends moodleform {
             }
         }
 
-        // Add button
-        $mform->addElement('submit', 'addfilter', get_string('addfilter','filters'));
+        // Add + replace filters buttons
+        $objs = array();
+        $objs[] = &$mform->createElement('submit', 'addfilter', get_string('addfilter','filters'));
+        $mform->addElement('group', 'addfiltergrp', '', $objs, ' ', false);
 
         // Don't use last advanced state
         $mform->setShowAdvanced(false);
+    }
+    
+    function definition_after_data() {
+        global $SESSION;
+
+        if (!empty($SESSION->user_filtering)) {
+            $mform       =& $this->_form;
+            $mform->removeElement('addfiltergrp');
+
+            $objs = array();
+            $objs[] = &$mform->createElement('submit', 'addfilter', get_string('addfilter','filters'));
+            $objs[] = &$mform->createElement('submit', 'replaceall', get_string('replacefilters','filters'));
+            $mform->addElement('group', 'addfiltergrp', '', $objs, ' ', false);
+        }
     }
 }
 
