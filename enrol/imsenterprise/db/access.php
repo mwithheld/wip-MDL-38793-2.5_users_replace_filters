@@ -33,5 +33,13 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
         )
     ),
+
+    /* Unenrol anybody (including self) - requires allowmodifications enabled */
+    'enrol/imsenterprise:unenrol' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+        )
+    ),
 );
 
