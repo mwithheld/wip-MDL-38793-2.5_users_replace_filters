@@ -84,6 +84,17 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
     protected $defaultcategoryid;
 
     /**
+     * Does this plugin allow manual unenrolment of all users?
+     * All plugins allowing this must implement 'enrol/xxx:unenrol' capability
+     *
+     * @param stdClass $instance course enrol instance
+     * @return bool - true means user with 'enrol/xxx:unenrol' may unenrol others freely, false means nobody may touch user_enrolments
+     */
+    public function allow_unenrol(stdClass $instance) {
+        return true;
+    }
+
+    /**
      * Read in an IMS Enterprise file.
      * Originally designed to handle v1.1 files but should be able to handle
      * earlier types as well, I believe.
